@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Comparateur de plateformes SVOD</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--muted:#9aa4b2;--accent:#06b6d4}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;background:linear-gradient(180deg,#071026 0%,#071a29 100%);color:#e6eef6;line-height:1.45}
+    header{padding:28px 20px;text-align:center}
+    h1{margin:0;font-size:clamp(20px,3vw,32px)}
+    p.lead{margin:8px 0 0;color:var(--muted)}
+    .container{max-width:1100px;margin:28px auto;padding:0 18px}
+
+    /* controls */
+    .controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+    .search{flex:1;min-width:180px}
+    input[type="search"], select{width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:inherit}
+
+    /* grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.02));padding:16px;border-radius:14px;box-shadow:0 6px 18px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+    .card h2{margin:0 0 6px;font-size:18px;display:flex;align-items:center;gap:8px}
+    .badge{font-size:12px;padding:4px 8px;border-radius:999px;background:rgba(255,255,255,0.04);color:var(--muted)}
+    .meta{font-size:13px;color:var(--muted);margin-bottom:8px}
+    .proscons{display:flex;gap:8px;flex-direction:column;margin-bottom:8px}
+    ul{margin:6px 0 0 18px;padding:0}
+    .examples{font-size:13px;color:var(--muted);margin-top:8px}
+    footer{padding:22px;text-align:center;color:var(--muted)}
+
+    /* small helpers */
+    .tag{display:inline-block;background:rgba(6,182,212,0.12);color:var(--accent);padding:6px 8px;border-radius:8px;font-weight:600;font-size:12px}
+
+    @media (max-width:480px){.controls{flex-direction:column;align-items:stretch}.tag{display:none}}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Comparateur de plateformes SVOD</h1>
+    <p class="lead">Fiches rapides : description, avantages, défauts et exemples de programmes — modifiable facilement.</p>
+  </header>
+
+  <main class="container">
+    <div class="controls">
+      <div class="search"><input id="search" type="search" placeholder="Rechercher une plateforme ou un programme..." /></div>
+      <div style="width:190px">
+        <select id="filter">
+          <option value="all">Toutes les plateformes</option>
+          <option value="global">Généralistes (Netflix, Prime, Disney+...)</option>
+          <option value="niche">Niches / archives</option>
+          <option value="free">Gratuites / AVOD</option>
+        </select>
+      </div>
+    </div>
+
+    <section class="grid" id="platformGrid">
+
+      <!-- Netflix -->
+      <article class="card" data-name="Netflix" data-type="global">
+        <h2>Netflix <span class="badge">Abonnement payant</span></h2>
+        <div class="meta">Catalogue large, production originale importante</div>
+        <div class="proscons">
+          <div><strong>✅ Avantages :</strong>
+            <ul>
+              <li>Vaste catalogue international et productions originales à gros budget</li>
+              <li>Interface mature, profils, recommandations personnalisées</li>
+            </ul>
+          </div>
+          <div><strong>⚠️ Défauts :</strong>
+            <ul>
+              <li>Prix en hausse régulière, rotation des licences</li>
+              <li>Qualité inégale selon les programmes (beaucoup de contenu moyen)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="examples"><strong>Exemples :</strong> <em>Stranger Things</em>, <em>The Crown</em>, <em>Squid Game</em>.</div>
+      </article>
+
+      <!-- Disney+ -->
+      <article class="card" data-name="Disney+" data-type="global">
+        <h2>Disney+ <span class="badge">Abonnement payant</span></h2>
+        <div class="meta">Force sur franchises : Disney, Pixar, Marvel, Star Wars, National Geographic</div>
+        <div class="proscons">
+          <div><strong>✅ Avantages :</strong>
+            <ul>
+              <li>Contenu familial et franchises fortes</li>
+              <li>Collections exclusives et sorties cinéma (selon accords)</li>
+            </ul>
+          </div>
+          <div><strong>⚠️ Défauts :</strong>
+            <ul>
+              <li>Catalogues centrés sur franchises — moins de diversité pour adultes</li>
+              <li>Les nouveautés cinéma peuvent coûter en supplément (PVOD) selon les cas</li>
+            </ul>
+          </div>
+        </div>
+        <div class="examples"><strong>Exemples :</strong> <em>The Mandalorian</em>, <em>Loki</em>, films Pixar.</div>
+      </article>
+
+      <!-- Amazon Prime Video -->
+      <article class="card" data-name="Amazon Prime Video" data-type="global">
+        <h2>Amazon Prime Video <span class="badge">Inclus avec Prime / Abonnement</span></h2>
+        <div class="meta">Offre mêlant catalogue inclus et location/achat</div>
+        <div class="proscons">
+          <div><strong>✅ Avantages :</strong>
+            <ul>
+              <li>Inclus souvent dans l'abonnement Prime, bonnes séries originales</li>
+              <li>Catalogue mixte : SVOD + VOD à l'acte</li>
+            </ul>
+          </div>
+          <div><strong>⚠️ Défauts :</strong>
+            <ul>
+              <li>Interface parfois confuse (achats vs abonnements)</li>
+              <li>Catalogue des nouveautés dépend des licences locales</li>
+            </ul>
+          </div>
+        </div>
+        <div class="examples"><strong>Exemples :</strong> <em>The Boys</em>, <em>The Marvelous Mrs. Maisel</em>.</div>
+      </article>
+
+      <!-- HBO Max / Max -->
+      <article class="card" data-name="HBO Max" data-type="global">
+        <h2>HBO Max <span class="badge">Abonnement payant</span></h2>
+        <div class="meta">Séries premium et productions prestige</div>
+        <div class="proscons">
+          <div><strong>✅ Avantages :</strong>
+            <ul>
+              <li>Séries acclamées (qualité et prestige), catalogue HBO/Warner</li>
+              <li>Contenu souvent salué par la critique</li>
+            </ul>
+          </div>
+          <div><strong>⚠️ Défauts :</strong>
+            <ul>
+              <li>Catalogue local parfois restreint selon accords</li>
+              <li>Prix et nommage (rebranding) peuvent prêter à confusion</li>
+            </ul>
+          </div>
+        </div>
+        <div class="examples"><strong>Exemples :</strong> <em>Succession</em>, <em>Euphoria</em>, <em>Game of Thrones</em>.</div>
+      </article>
+
+      <!-- Madelen (INA) -->
+      <article class="card" data-name="Madelen" data-type="niche">
+        <h2>Madelen (INA) <span class="badge">Abonnement / archives</span></h2>
+        <div class="meta">Plateforme de l'INA : archives, programmes historiques français</div>
+        <div class="proscons">
+          <div><strong>✅ Avantages :</strong>
+            <ul>
+              <li>Catalogue d'archives unique : séries, magazines et documents historiques</li>
+              <li>Idéal pour la fiction vintage et documentaires français</li>
+            </ul>
+          </div>
+          <div><strong>⚠️ Défauts :</strong>
+            <ul>
+              <li>Moins d'œuvres récentes ou de productions internationales</li>
+              <li>Interface plus orientée catalogue / collection que binge-watching moderne</li>
+            </ul>
+          </div>
+        </div>
+        <div class="examples"><strong>Exemples :</strong> <em>Les Enquêtes du Commissaire Maigret</em>, <em>Thierry la Fronde</em>, archives télévisuelles.</div>
+      </article>
+
+      <!-- Pluto TV -->
+      <article class="card" data-name="Pluto TV" data-type="free">
+        <h2>Pluto TV <span class="badge">Gratuit (AVOD)</span></h2>
+        <div class="meta">Streaming gratuit avec publicité et chaînes thématiques</div>
+        <div class="proscons">
+          <div><strong>✅ Avantages :</strong>
+            <ul>
+              <li>Accès gratuit à de nombreuses chaînes et playlists thématiques</li>
+              <li>Simple à utiliser pour découvrir du contenu sans abonnement</li>
+            </ul>
+          </div>
+          <div><strong>⚠️ Défauts :</strong>
+            <ul>
+              <li>Présence de publicités et qualité très variable du catalogue</li>
+              <li>Moins de nouveautés exclusives</li>
+            </ul>
+          </div>
+        </div>
+        <div class="examples"><strong>Exemples :</strong> chaînes films, séries rétro, actualités en continu.</div>
+      </article>
+
+      <!-- Molotov -->
+      <article class="card" data-name="Molotov" data-type="free">
+        <h2>Molotov <span class="badge">Freemium / replay</span></h2>
+        <div class="meta">Agrégateur de chaînes TV et service de replay</div>
+        <div class="proscons">
+          <div><strong>✅ Avantages :</strong>
+            <ul>
+              <li>Regroupe les chaînes TV, replay et options d'enregistrement</li>
+              <li>Offre gratuite intéressante; options payantes pour plus de stockage</li>
+            </ul>
+          </div>
+          <div><strong>⚠️ Défauts :</strong>
+            <ul>
+              <li>Ne remplace pas toujours une SVOD pour séries exclusives</li>
+              <li>Certaines fonctionnalités avancées payantes</li>
+            </ul>
+          </div>
+        </div>
+        <div class="examples"><strong>Exemples :</strong> replay chaînes nationales, bouquets thématiques.</div>
+      </article>
+
+    </section>
+
+    <footer>
+      <div class="tag">Template prêt à l'emploi — modifiez les fiches en HTML</div>
+      <p style="margin-top:10px">Besoin d'ajouter d'autres plateformes, d'exporter en PDF ou d'une version multi-langues ? Dites-moi ce que vous voulez personnaliser.</p>
+    </footer>
+  </main>
+
+  <script>
+    // Recherche & filtre simple côté client
+    const search = document.getElementById('search');
+    const filter = document.getElementById('filter');
+    const grid = document.getElementById('platformGrid');
+    const cards = Array.from(grid.querySelectorAll('.card'));
+
+    function render(){
+      const q = search.value.trim().toLowerCase();
+      const f = filter.value;
+      cards.forEach(card=>{
+        const name = card.dataset.name.toLowerCase();
+        const type = card.dataset.type;
+        const text = card.textContent.toLowerCase();
+        const matchesQ = !q || name.includes(q) || text.includes(q);
+        const matchesF = f === 'all' || (f === 'global' && type === 'global') || (f === 'niche' && type === 'niche') || (f === 'free' && type === 'free');
+        card.style.display = (matchesQ && matchesF) ? '' : 'none';
+      });
+    }
+    search.addEventListener('input', render);
+    filter.addEventListener('change', render);
+  </script>
+</body>
+</html>
